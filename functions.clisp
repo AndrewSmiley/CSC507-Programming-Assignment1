@@ -55,5 +55,69 @@
 
 )
 
+;write to console
+(write-line "Bubblesort outputs")
+(write-line "")
+(write-line "")
+(write-line "Single number")
+(write (bubblesort (list 75)))
+(write-line "")
+(write-line "")
 (write-line "10 unsorted numbers")
 (write (bubblesort (list 75 8 65 9 12 54 36 18 1 28)))
+(write-line "")
+(write-line "")
+(write-line "Already sorted list")
+(write (bubblesort (list 1 2 3 4 5 6 8 9)))
+(write-line "")
+(write-line "")
+(write-line "Sorted list in descending order")
+(write (bubblesort (list 9 8 7 6 5 4 3 2 1)))
+(write-line "")
+(write-line "")
+
+;here's the selection sort
+(defun selectionsort (data)
+    ;iterate over n-1
+    ;for some reason this loop wouldn't work until it had a name?
+    (loop named outer for i from 0 to (- (length data) 1) do
+        ;set our temp counter
+        (setq p i)
+        (loop for j from (+ i 1) to (- (length data) 1) do
+            ;if the next element is smaller than the current one (i), we'll need 
+            ;to swap it
+            (if (< (nth j data)(nth p data))  (setq p j) )
+        )
+        ;could i do this with first and second?
+        ;maybe. btu this works so let's roll with it
+        ;so now do our swapping
+        (setq temp (nth p data))
+        (setf (nth p data) (nth i data))
+        (setf (nth i data) temp)
+    )
+
+    
+    (return-from selectionsort data)
+)
+
+;(write (selectionsort (list 75 8 65 9 12 54 36 18 1 28)))
+
+(write-line "SelectionSort outputs")
+(write-line "")
+(write-line "")
+(write-line "Single number")
+(write (selectionsort (list 75)))
+(write-line "")
+(write-line "")
+(write-line "10 unsorted numbers")
+(write (selectionsort (list 75 8 65 9 12 54 36 18 1 28)))
+(write-line "")
+(write-line "")
+(write-line "Already sorted list")
+(write (selectionsort (list 1 2 3 4 5 6 8 9)))
+(write-line "")
+(write-line "")
+(write-line "Sorted list in descending order")
+(write (selectionsort (list 9 8 7 6 5 4 3 2 1)))
+(write-line "")
+(write-line "")
