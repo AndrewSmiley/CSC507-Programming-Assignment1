@@ -1,0 +1,35 @@
+;merge sort function
+(defun mergesort (data)
+  (if (= (length data) 1) ;check for our base case
+      (return-from mergesort data) ;if it's a base case, go ahead and return 
+      (let
+        ;truncate allows us to find the middle if it's an uneven number of elements
+        ((middle (truncate (/ (length data) 2))))
+        ;merge allows us to do the merge portion of merge sort without using our own merge function
+        ;we can just do the recursion here because ultimately our two lists will end up returning here
+        ;and truth be told i'm not entirely sure how to create temp variables within let
+        (return-from mergesort (merge 'list (mergesort (subseq data 0 middle)) (mergesort (subseq data middle (length data))) #'<))
+        )
+    )
+)
+
+;write to console
+(write-line "Merge sort outputs")
+(write-line "")
+(write-line "")
+(write-line "Single number")
+(write (mergesort (list 75)))
+(write-line "")
+(write-line "")
+(write-line "10 unsorted numbers")
+(write (mergesort (list 75 8 65 9 12 54 36 18 1 28)))
+(write-line "")
+(write-line "")
+(write-line "Already sorted list")
+(write (mergesort (list 1 2 3 4 5 6 8 9)))
+(write-line "")
+(write-line "")
+(write-line "Sorted list in descending order")
+(write (mergesort (list 9 8 7 6 5 4 3 2 1)))
+(write-line "")
+(write-line "")
