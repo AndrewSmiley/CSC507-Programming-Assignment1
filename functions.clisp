@@ -33,3 +33,27 @@
 (write (mergesort (list 9 8 7 6 5 4 3 2 1)))
 (write-line "")
 (write-line "")
+
+
+;our bubblesort implementation
+(defun bubblesort(list) ;going to try this one, because if i'm correct all i need to do is give it a data type
+    (loop for i from 0 to (- (length list) 1) 
+    do 
+        (loop for sublist on list while (cdr sublist) 
+        ;basically continue to split the main list in to a 
+        ;smaller list and swap the first two elements if the first is greater than the second
+        do
+            ;now we do the check and the reassignment
+            ;i believe this should work because we're still pointing to the original list
+            ;in mem
+            (if (> (first sublist) (second sublist))
+                (rotatef (first sublist) (second sublist))
+            )
+        )
+    )
+    (return-from bubblesort list) ;down here we can return once we've sorted it 
+
+)
+
+(write-line "10 unsorted numbers")
+(write (bubblesort (list 75 8 65 9 12 54 36 18 1 28)))
