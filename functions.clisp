@@ -1,7 +1,7 @@
 ;merge sort function
 (defun mergesort (data)
   (if (= (length data) 1) ;check for our base case
-      (return-from mergesort data) ;if it's a base case, go ahead and return 
+      (return-from mergesort data) ;if it's a base case, go ahead and return
       (let
         ;truncate allows us to find the middle if it's an uneven number of elements
         ((middle (truncate (/ (length data) 2))))
@@ -14,33 +14,34 @@
 )
 
 ;write to console
-(write-line "Merge sort outputs")
-(write-line "")
-(write-line "")
+(write-line "Merge Sort outputs")
+(terpri)(terpri)
 (write-line "Single number")
 (write (mergesort (list 75)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "10 unsorted numbers")
-(write (mergesort (list 75 8 65 9 12 54 36 18 1 28)))
-(write-line "")
-(write-line "")
+(setf unsorted(list 75 8 65 9 12 54 36 18 1 28))
+(write unsorted)(terpri)
+(write (mergesort unsorted))
+(terpri)(terpri)
 (write-line "Already sorted list")
+(setf sorted (list 1 2 3 4 5 6 8 9))
+(write sorted)(terpri)
 (write (mergesort (list 1 2 3 4 5 6 8 9)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "Sorted list in descending order")
-(write (mergesort (list 9 8 7 6 5 4 3 2 1)))
-(write-line "")
-(write-line "")
+(setf descending (list 9 8 7 6 5 4 3 2 1))
+(write descending)(terpri)
+(write (mergesort descending))
+(terpri)(terpri)
 
 
 ;our bubblesort implementation
 (defun bubblesort(list) ;going to try this one, because if i'm correct all i need to do is give it a data type
-    (loop for i from 0 to (- (length list) 1) 
-    do 
-        (loop for sublist on list while (cdr sublist) 
-        ;basically continue to split the main list in to a 
+    (loop for i from 0 to (- (length list) 1)
+    do
+        (loop for sublist on list while (cdr sublist)
+        ;basically continue to split the main list in to a
         ;smaller list and swap the first two elements if the first is greater than the second
         do
             ;now we do the check and the reassignment
@@ -51,30 +52,31 @@
             )
         )
     )
-    (return-from bubblesort list) ;down here we can return once we've sorted it 
+    (return-from bubblesort list) ;down here we can return once we've sorted it
 
 )
 
 ;write to console
 (write-line "Bubblesort outputs")
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "Single number")
 (write (bubblesort (list 75)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "10 unsorted numbers")
-(write (bubblesort (list 75 8 65 9 12 54 36 18 1 28)))
-(write-line "")
-(write-line "")
+(setf unsorted(list 75 8 65 9 12 54 36 18 1 28))
+(write unsorted)(terpri)
+(write (bubblesort unsorted))
+(terpri)(terpri)
 (write-line "Already sorted list")
+(setf sorted (list 1 2 3 4 5 6 8 9))
+(write sorted)(terpri)
 (write (bubblesort (list 1 2 3 4 5 6 8 9)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "Sorted list in descending order")
-(write (bubblesort (list 9 8 7 6 5 4 3 2 1)))
-(write-line "")
-(write-line "")
+(setf descending (list 9 8 7 6 5 4 3 2 1))
+(write descending)(terpri)
+(write (bubblesort descending))
+(terpri)(terpri)
 
 ;here's the selection sort
 (defun selectionsort (data)
@@ -84,7 +86,7 @@
         ;set our temp counter
         (setq p i)
         (loop for j from (+ i 1) to (- (length data) 1) do
-            ;if the next element is smaller than the current one (i), we'll need 
+            ;if the next element is smaller than the current one (i), we'll need
             ;to swap it
             (if (< (nth j data)(nth p data))  (setq p j) )
         )
@@ -96,28 +98,70 @@
         (setf (nth i data) temp)
     )
 
-    
+
     (return-from selectionsort data)
 )
 
 ;(write (selectionsort (list 75 8 65 9 12 54 36 18 1 28)))
 
-(write-line "SelectionSort outputs")
-(write-line "")
-(write-line "")
+(write-line "Selection Sort outputs")
+(terpri)(terpri)
 (write-line "Single number")
 (write (selectionsort (list 75)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "10 unsorted numbers")
-(write (selectionsort (list 75 8 65 9 12 54 36 18 1 28)))
-(write-line "")
-(write-line "")
+(setf unsorted(list 75 8 65 9 12 54 36 18 1 28))
+(write unsorted)(terpri)
+(write (selectionsort unsorted))
+(terpri)(terpri)
 (write-line "Already sorted list")
+(setf sorted (list 1 2 3 4 5 6 8 9))
+(write sorted)(terpri)
 (write (selectionsort (list 1 2 3 4 5 6 8 9)))
-(write-line "")
-(write-line "")
+(terpri)(terpri)
 (write-line "Sorted list in descending order")
-(write (selectionsort (list 9 8 7 6 5 4 3 2 1)))
-(write-line "")
-(write-line "")
+(setf descending (list 9 8 7 6 5 4 3 2 1))
+(write descending)(terpri)
+(write (selectionsort descending))
+(terpri)(terpri)
+
+
+(defun insertionsort(list)
+    (setq length (length list))
+    (loop for i from 1 to (- length 1)
+        do
+            (setq j i)
+            (loop while (and(> j 0) (< (nth j list) (nth (- j 1) list) ))
+                do
+                    (setq temp (nth j list))
+                    (setf (nth j list) (nth (- j 1) list) )
+                    (setf (nth (- j 1) list) temp)
+                    (setq j (- j 1))
+            )
+    )
+    (return-from insertionsort list)
+)
+
+
+; (setf d (list 7 6 5 4 3 2 1))
+; (write (insertionsort d (length d)))
+(write-line "Insertion Sort outputs")
+(terpri)(terpri)
+(write-line "Single number")
+(write (insertionsort (list 75)))
+(terpri)(terpri)
+(write-line "10 unsorted numbers")
+(setf unsorted(list 75 8 65 9 12 54 36 18 1 28))
+(write unsorted)(terpri)
+(write (insertionsort unsorted))
+(terpri)(terpri)
+(write-line "Already sorted list")
+(setf sorted (list 1 2 3 4 5 6 8 9))
+(write sorted)(terpri)
+(write (insertionsort (list 1 2 3 4 5 6 8 9)))
+(terpri)(terpri)
+(write-line "Sorted list in descending order")
+(setf descending (list 9 8 7 6 5 4 3 2 1))
+(write descending)(terpri)
+(write (insertionsort descending))
+(terpri)(terpri)
